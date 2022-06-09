@@ -8,6 +8,11 @@ import router from './src/routes/index.js'
 import errorHandler from './src/middleware/errorHandler.js'
 import dataFormatting from './src/middleware/dataFormatting.js'
 import config from './config.js';
+import db from '#db';
+
+global.config = config;
+// 初始化数据库
+db.dbInit();
 
 const app = new Koa();
 

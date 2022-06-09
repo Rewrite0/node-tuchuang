@@ -5,3 +5,5 @@ dist-ssr
 *.local
 public
 static
+*.sql
+*.sqlite
