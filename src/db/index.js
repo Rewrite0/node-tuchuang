@@ -6,10 +6,6 @@ import fs from 'fs';
  * @returns 数据库连接
  */
 const openDb = (options) => {
-	options = {
-		...options,
-		verbose: console.log
-	}
 	return new Database('database.sqlite', options)
 }
 
@@ -21,7 +17,7 @@ const dbInit = () => {
 		if (!(stat && stat.isFile())) {
 			console.log('初始化数据库')
 			const db = openDb();
-			db.prepare(`CREATE TABLE images(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, date VARCHAR, mime VARCHAR, md5 VARCHAR)`).run();
+			db.prepare(`CREATE TABLE images(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, date VARCHAR, mime VARCHAR)`).run();
 			db.close();
 			console.log('初始化完成')
 		}
@@ -91,7 +87,7 @@ const dbDel = (name) => {
  */
 const dbSearch = (name) => {
 	const db = openDb();
-	const res = db.get(`SELECT * FROM images WHERE name like '%${name}%';`).all();
+	const res = db.prepare(`SELECT * FROM images WHERE name like '%${name}%';`).all();
 	db.close();
 	return res;
 }
