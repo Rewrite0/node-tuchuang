@@ -9,7 +9,9 @@
     "#src/*": "./src/*",
     "#ctr": "./src/controllers/index.js",
     "#routes": "./src/routes/index.js",
-    "#db": "./src/db/index.js"
+    "#db": "./src/db/index.js",
+    "#utils/*": "./src/utils/*",
+    "#middleware/*": "./src/middleware/*"
   },
   "scripts": {
     "dev": "nodemon app.js",
@@ -22,8 +24,7 @@
     "koa-logger": "^3.2.1",
     "koa-router": "^10.1.1",
     "koa-static": "^5.0.0",
-    "koa2-cors": "^2.0.6",
-    "md5": "^2.3.0"
+    "koa2-cors": "^2.0.6"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

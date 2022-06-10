@@ -1,8 +1,12 @@
 const errorHandler = async (ctx, next) => {
 	try {
+
 		ctx.error = (code, message) => {
-      if (typeof code === 'string') message = code;
-      ctx.throw(code || 500, message || '服务器错误');
+      if (typeof code !== 'number') {
+				message = code;
+				code = 400;
+			}
+      ctx.throw(code, message || '服务器错误');
     };
 
 		await next();
