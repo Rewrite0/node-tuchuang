@@ -35,8 +35,8 @@ app.use(cors({
 }));
 app.use(logger());
 app.use(resource(config.publicDir));
-app.use(dataFormatting);
 app.use(errorHandler);
+app.use(dataFormatting);
 
 app.use(koaBody({
 	multipart: true, // 文件上传

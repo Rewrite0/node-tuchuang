@@ -1,19 +1,16 @@
 const dataFormatting = async (ctx, next) => {
 
-	ctx.success = (msg, data) => {
+	ctx.success = (data) => {
 		ctx.body = {
 			code: 200,
-			data: {
-				msg,
-				...data
-			}
+			data
 		}
 	}
 
 	ctx.fail = (msg, code = 500) => {
 		ctx.body = {
-			code,
-			msg
+			msg,
+			code
 		}
 	}
 
