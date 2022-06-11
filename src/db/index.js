@@ -1,5 +1,6 @@
 import Database from 'better-sqlite3';
 import fs from 'fs';
+import context from 'koa/lib/context';
 
 /**
  * 创建一个新数据库连接, 如果数据库文件不存在则创建
@@ -26,7 +27,7 @@ const dbInit = () => {
 
 /**
  * 获取所有数据
- * @param {Object} param => {page: String, pageSize: String}, 可选参数,用于分页
+ * @param {Object} param => {page: Number, pageSize: Number}, 可选参数,用于分页
  */
 const dbGet = ({ page = 1, pageSize = 10 }) => {
 	const db = openDb();
@@ -37,13 +38,17 @@ const dbGet = ({ page = 1, pageSize = 10 }) => {
 	// limit: 起始位, 限制数量
 	let limit = `${(page - 1) * pageSize}, ${pageSize}`;
 
-	const res = db.prepare(`SELECT * FROM images limit ${limit};`)
+	const res = db.prepare(`SELECT * FROM images limit ${limit};`).all();
 	db.close();
 
-	if (res.length === 0) {
-		throw '没有数据!'
-	} else if (page > pageNum) {
-		throw '超过总页码!'
+	if (page > pageNum && pageNum !== 0) {
+		return {
+			msg: '超出页码!'
+		}
+	} else if (res.length === 0) {
+		return {
+			msg: '没有数据!'
+		}
 	}
 
 	return {
