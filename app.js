@@ -15,8 +15,8 @@ global.config = config;
 // 初始化数据库
 db.dbInit();
 // 初始化资源目录
-await mkdir('public/upload');
-await mkdir('public/images');
+await mkdir(config.uploadDir);
+await mkdir(config.fileDir);
 
 const app = new Koa();
 

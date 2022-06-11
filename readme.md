@@ -20,6 +20,7 @@ cd node-tuchuang && yarn
 ```
 
 # 使用
+可以在 `config.js` 中修改一些配置
 
 ```
 # 启动

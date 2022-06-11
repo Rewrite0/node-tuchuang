@@ -6,8 +6,7 @@ import fs from 'fs/promises'
  * @param {String} name 文件名
  */
 async function delFile(name) {
-  const imageDir = path.resolve('./public/images');
-  const img = path.join(imageDir, name);
+  const img = path.join(global.config.fileDir, name);
   await fs.unlink(img);
 }
 
