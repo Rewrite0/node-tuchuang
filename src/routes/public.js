@@ -5,5 +5,6 @@ const router = Router();
 
 router.post('/api/upload', ctr.upload);
 router.get('/api/search', ctr.search);
+router.post('/api/del', ctr.del);
 
 export default router;
