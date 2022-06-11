@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'koa2',
+      name: 'node-tuchuang',
       script: 'app.js',
       autorestart: true,
       max_restarts: 5,
