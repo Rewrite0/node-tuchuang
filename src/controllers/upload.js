@@ -11,7 +11,7 @@ export const upload = async (ctx) => {
     return;
   }
   const file = ctx.request.files.file;
-  const imageDir = global.config.fileDir;
+  const imageDir = path.join(global.config.publicDir, global.config.fileDir);
 
   const filePath = file.path;
   const name = file.name;

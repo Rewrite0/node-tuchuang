@@ -1,6 +1,5 @@
 import Database from 'better-sqlite3';
 import fs from 'fs';
-import context from 'koa/lib/context';
 
 /**
  * 创建一个新数据库连接, 如果数据库文件不存在则创建
@@ -18,7 +17,7 @@ const dbInit = () => {
 		if (!(stat && stat.isFile())) {
 			console.log('初始化数据库')
 			const db = openDb();
-			db.prepare(`CREATE TABLE images(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, date VARCHAR, mime VARCHAR)`).run();
+			db.prepare(`CREATE TABLE images(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, url VARCHAR, date VARCHAR, mime VARCHAR)`).run();
 			db.close();
 			console.log('初始化完成')
 		}
@@ -68,7 +67,8 @@ const dbGet = ({ page = 1, pageSize = 10 }) => {
  */
 const dbInsert = ({ name, date, mime }) => {
 	const db = openDb();
-	const res = db.prepare(`INSERT INTO images VALUES (null, '${name}', '${date}', '${mime}');`).run();
+	const url = `/${global.config.fileDir}/${name}`;
+	const res = db.prepare(`INSERT INTO images VALUES (null, '${name}', '${url}', '${date}', '${mime}');`).run();
 	db.close();
 	return res;
 }

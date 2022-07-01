@@ -15,8 +15,8 @@ global.config = config;
 // 初始化数据库
 db.dbInit();
 // 初始化资源目录
-await mkdir(config.uploadDir);
-await mkdir(config.fileDir);
+await mkdir(path.join(config.publicDir, config.uploadDir));
+await mkdir(path.join(config.publicDir, config.fileDir));
 
 const app = new Koa();
 
@@ -41,7 +41,7 @@ app.use(dataFormatting);
 app.use(koaBody({
 	multipart: true, // 文件上传
 	formidable: {
-		uploadDir: path.resolve(config.uploadDir), // 文件上传存放目录
+		uploadDir: path.join(config.publicDir, config.uploadDir), // 文件上传存放目录
 		maxFieldsSize: config.maxFileSize,	// 限制文件大小
 		keepExtensions: true, // 保留后缀
 	}

@@ -3,7 +3,7 @@ const dataFormatting = async (ctx, next) => {
 	ctx.success = (data) => {
 		ctx.body = {
 			code: 200,
-			data
+			...data
 		}
 	}
 
